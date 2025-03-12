@@ -1,5 +1,5 @@
 const RotationPage = () => {
-  return <div>RotationPage</div>;
+  return <div>챔피언 로테이션</div>;
 };
 
 export default RotationPage;
