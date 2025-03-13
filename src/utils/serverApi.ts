@@ -44,7 +44,10 @@ export const getChampionDetailData = async (
   const championDetailUrl = `${API_BASE_URL}/cdn/${version}/data/ko_KR/champion/${id}.json`;
 
   try {
-    const response = await fetch(championDetailUrl);
+    const response = await fetch(championDetailUrl, {
+      cache: "no-store",
+    });
+
     const { data } = await response.json();
 
     return data[id]; // 챔피언 상세 데이터 반환
