@@ -19,10 +19,10 @@ export const getLatestVersion = async (): Promise<string> => {
 export const getChampionData = async (): Promise<ChampionData | null> => {
   // API 요청 (ISR 적용)
   const version = await getLatestVersion(); // 최신 버전 정보 가져오기
-  const championUrl = `${API_BASE_URL}/cdn/${version}/data/ko_KR/champion.json`;
+  const championDetailUrl = `${API_BASE_URL}/cdn/${version}/data/ko_KR/champion.json`;
 
   try {
-    const response = await fetch(championUrl, {
+    const response = await fetch(championDetailUrl, {
       next: { revalidate: ONE_DAY_SECONDS },
     });
 
@@ -35,7 +35,26 @@ export const getChampionData = async (): Promise<ChampionData | null> => {
   }
 };
 
-// 아이템 데이터 가져오기
+// 최신 버전의 챔피언 상세 데이터 가져오기
+export const getChampionDetailData = async (
+  id: string,
+): Promise<ChampionData | null> => {
+  // API 요청 (SSR 적용)
+  const version = await getLatestVersion(); // 최신 버전 정보 가져오기
+  const championDetailUrl = `${API_BASE_URL}/cdn/${version}/data/ko_KR/champion/${id}.json`;
+
+  try {
+    const response = await fetch(championDetailUrl);
+    const { data } = await response.json();
+
+    return data[id]; // 챔피언 상세 데이터 반환
+  } catch (error) {
+    console.log("챔피언 상세 데이터를 불러오는 중 오류 발생 : ", error);
+    return null;
+  }
+};
+
+// 최신 버전의 아이템 데이터 가져오기
 export const getItemData = async (): Promise<ItemData | null> => {
   // API 요청 (SSG 적용)
   const version = await getLatestVersion(); // 최신 버전 정보 가져오기
