@@ -9,4 +9,10 @@ export interface ChampionData {
     full: string;
   };
   tags: string[];
+  info: {
+    attack: number;
+    defense: number;
+    magic: number;
+    difficulty: number;
+  };
 }
