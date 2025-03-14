@@ -18,9 +18,6 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "리그 오브 레전드 정보 앱",
   description: "Riot Games API를 활용한 LoL 정보 앱",
-  // icons: {
-  //   icon: "/favicon.ico",
-  // },
 };
 
 export default function RootLayout({
