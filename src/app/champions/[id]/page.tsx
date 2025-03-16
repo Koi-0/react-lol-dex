@@ -1,8 +1,27 @@
+import { ChampionData } from "@/types/champion";
 import { API_BASE_URL, getChampionDetailData } from "@/utils/serverApi";
+import { Metadata } from "next";
 import Image from "next/image";
 
 interface DetailIdProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: DetailIdProps): Promise<Metadata> {
+  const { id } = await params;
+
+  const response = await fetch(
+    `${API_BASE_URL}/cdn/15.5.1/data/ko_KR/champion/${id}.json`,
+  ).then((res) => res.json());
+  const { data } = await response;
+  const championsMetadata: ChampionData = data[id];
+
+  return {
+    title: `${championsMetadata.name} - My Riot App`,
+    description: `${championsMetadata.lore}`,
+  };
 }
 
 const ChampionDetailIdPage = async ({ params }: DetailIdProps) => {
@@ -30,7 +49,7 @@ const ChampionDetailIdPage = async ({ params }: DetailIdProps) => {
         height={200}
         className="mx-auto"
       />
-      <p className="mt-4 text-[#f55]">{championsData.blurb}</p>
+      <p className="mt-4 text-[#f55]">{championsData.lore}</p>
       <div className="mt-6">
         <h3 className="text-xl font-semibold text-[#f55]">스탯</h3>
         <ul className="list-inside list-disc">
