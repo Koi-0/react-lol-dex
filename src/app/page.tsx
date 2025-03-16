@@ -24,6 +24,7 @@ const HomePage = () => {
                   "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Camille_2.jpg"
                 }
                 alt="Picture of the author"
+                priority
                 width={400}
                 height={300}
               />
@@ -40,6 +41,7 @@ const HomePage = () => {
                   "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Elise_3.jpg"
                 }
                 alt="Picture of the author"
+                priority
                 width={400}
                 height={300}
               />
@@ -56,8 +58,9 @@ const HomePage = () => {
                   "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Akali_2.jpg"
                 }
                 alt="Picture of the author"
+                priority
                 width={400}
-                height={300}
+                height={400}
               />
             </div>
             금주 로테이션 확인
