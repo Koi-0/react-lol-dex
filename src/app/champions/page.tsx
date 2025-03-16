@@ -1,9 +1,16 @@
 import { ChampionData } from "@/types/champion";
 import { API_BASE_URL, getChampionData } from "@/utils/serverApi";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-const ChampionPage = async () => {
+export const metadata: Metadata = {
+  title: "LOL DEX - 챔피언 목록",
+  description:
+    "리그 오브 레전드의 모든 챔피언을 검색하고 상세 정보를 확인하세요.",
+};
+
+export default async function ChampionPage() {
   const championsData = await getChampionData();
 
   if (!championsData) {
@@ -41,6 +48,4 @@ const ChampionPage = async () => {
       </div>
     </div>
   );
-};
-
-export default ChampionPage;
+}
