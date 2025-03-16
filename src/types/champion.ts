@@ -5,6 +5,7 @@ export interface ChampionData {
   name: string;
   title: string;
   blurb: string;
+  lore: string;
   image: {
     full: string;
   };
