@@ -1,8 +1,15 @@
 import { ItemData } from "@/types/item";
 import { API_BASE_URL, getItemData } from "@/utils/serverApi";
+import type { Metadata } from "next";
 import Image from "next/image";
 
-const Itempage = async () => {
+export const metadata: Metadata = {
+  title: "LOL DEX - 아이템 목록",
+  description:
+    "리그 오브 레전드의 모든 아이템 정보를 확인하고 최적의 빌드를 구성하세요.",
+};
+
+export default async function Itempage() {
   const itemData = await getItemData();
 
   if (!itemData) {
@@ -35,6 +42,4 @@ const Itempage = async () => {
       </div>
     </div>
   );
-};
-
-export default Itempage;
+}
