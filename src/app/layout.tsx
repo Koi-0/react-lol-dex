@@ -16,8 +16,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "리그 오브 레전드 정보 앱",
-  description: "Riot Games API를 활용한 LoL 정보 앱",
+  title: "LOL DEX - 리그 오브 레전드 백과사전",
+  description:
+    "리그 오브 레전드 챔피언, 아이템, 로테이션 정보를 한눈에 확인하세요!",
 };
 
 export default function RootLayout({
