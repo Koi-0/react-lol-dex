@@ -19,12 +19,12 @@ export async function generateMetadata({
   const championsMetadata: ChampionData = data[id];
 
   return {
-    title: `${championsMetadata.name} - My Riot App`,
+    title: `LOL DEX - ${championsMetadata.id}`,
     description: `${championsMetadata.lore}`,
   };
 }
 
-const ChampionDetailIdPage = async ({ params }: DetailIdProps) => {
+export default async function ChampionDetailIdPage({ params }: DetailIdProps) {
   const { id } = await params;
   const championsData = await getChampionDetailData(id);
 
@@ -61,6 +61,4 @@ const ChampionDetailIdPage = async ({ params }: DetailIdProps) => {
       </div>
     </div>
   );
-};
-
-export default ChampionDetailIdPage;
+}
