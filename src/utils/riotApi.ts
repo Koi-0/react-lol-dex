@@ -1,5 +1,4 @@
-// 챔피언 로테이션 데이터 가져오기
-
+// 챔피언 로테이션 데이터 가져오기 (클라이언트 로직)
 import { ChampionRotationData } from "@/types/championRotation";
 
 export const apiKey = process.env.NEXT_PUBLIC_RIOT_API_KEY;
