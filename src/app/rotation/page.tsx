@@ -1,26 +1,37 @@
 "use client";
 
-import { getChampionRotationData } from "@/utils/riotApi";
 import { useQuery } from "@tanstack/react-query";
+import { getChampionRotationData } from "@/utils/riotApi";
 
 const RotationPage = () => {
-  const { data } = useQuery({
-    queryKey: ["ChampionRotation"],
+  // 챔피언 로테이션 데이터 가져오기
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["ChampionRotationData"],
     queryFn: getChampionRotationData,
   });
 
-  const championsRotationData = data?.freeChampionIds;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>데이터를 불러오는 중 오류 발생</div>;
 
-  championsRotationData?.map(() => {});
-
-  console.log("championsRotationData : ", championsRotationData);
+  const champions = data
+    ? data.freeChampionIds.map((id) => ({
+        id,
+        name: `Champion ${id}`,
+        title: "Title Placeholder",
+      }))
+    : [];
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold text-[#f55]">
-        챔피언 로테이션 / CSR
-      </h1>
-      <div>{JSON.stringify(data)}</div>
+      <h1>챔피언 로테이션</h1>
+      <div>
+        {champions?.map((champion) => (
+          <div key={champion.id}>
+            <h2>{champion.name}</h2>
+            <p>{champion.title}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
