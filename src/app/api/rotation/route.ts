@@ -1,3 +1,5 @@
+// 서버 로직
+
 import { ChampionRotationData } from "@/types/championRotation";
 import { apiKey, apiRequestUrl } from "@/utils/riotApi";
 import { ONE_DAY_SECONDS } from "@/utils/serverApi";
