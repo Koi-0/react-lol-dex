@@ -1,28 +1,25 @@
-// 서버 로직
-
+import { ChampionData } from "@/types/champion";
 import { ChampionRotationData } from "@/types/championRotation";
 import { apiKey, apiRequestUrl } from "@/utils/riotApi";
-import { ONE_DAY_SECONDS } from "@/utils/serverApi";
+import { getChampionData } from "@/utils/serverApi";
 import { NextResponse } from "next/server";
 
+// API Route (GET 함수)를 통해 서버에서 챔피언 로테이션 데이터 가져오기
 export async function GET() {
-  // API KEY가 없는 경우 에러 발생
+  // API-KEY가 없는 경우
   if (!apiKey) {
     return NextResponse.json(
-      { error: "API 요청 중 에러 발생" },
+      { error: "서버 내부 오류가 발생했습니다." },
       { status: 500 },
     );
   }
 
-  // Riot Games API 호출
+  // API 요청
   try {
     const response = await fetch(apiRequestUrl, {
       method: "GET",
       headers: {
         "X-Riot-Token": apiKey,
-      },
-      next: {
-        revalidate: ONE_DAY_SECONDS,
       },
     });
 
@@ -30,9 +27,34 @@ export async function GET() {
       throw new Error(`API 요청 실패 : 상태 코드 ${response.status}`);
     }
 
-    const data: ChampionRotationData[] = await response.json();
+    const data: ChampionRotationData = await response.json();
 
-    return NextResponse.json(data);
+    if (!data.freeChampionIds || !Array.isArray(data.freeChampionIds)) {
+      throw new Error("API 응답 형식이 올바르지 않습니다.");
+    }
+
+    const freeChampionIds = data.freeChampionIds;
+
+    // 챔피언 데이터 가져오기
+    const champions = await getChampionData();
+
+    if (!champions) {
+      return NextResponse.json(
+        { error: "챔피언 데이터를 불러올 수 없습니다." },
+        { status: 500 },
+      );
+    }
+
+    // 로테이션 챔피언 ID와 일치하는 챔피언만 필터링
+    const freeChampions: ChampionRotationData[] = freeChampionIds
+      .map((id) =>
+        Object.values(champions).find(
+          (champion: ChampionData) => champion.key === id.toString(),
+        ),
+      )
+      .filter((champion) => champion !== undefined);
+
+    return NextResponse.json(freeChampions);
   } catch (error) {
     console.error("데이터 패치 중 에러 발생", error);
 
