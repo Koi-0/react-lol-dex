@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Link from "next/link";
 import "./globals.css";
+import Providers from "./providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,7 +40,9 @@ export default function RootLayout({
             <Link href={"/rotation"}>챔피언 로테이션</Link>
           </nav>
         </header>
-        <main className="container mx-auto py-[100px]">{children}</main>
+        <Providers>
+          <main className="container mx-auto py-[100px]">{children}</main>
+        </Providers>
         <footer className="fixed bottom-0 mt-8 w-full bg-gray-800 p-4">
           <div className="container mx-auto text-center text-sm text-white">
             [Your Product Name] is not endorsed by Riot Games and does not
