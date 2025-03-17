@@ -5,7 +5,7 @@ import { ItemData } from "@/types/item";
 export const API_BASE_URL = "https://ddragon.leagueoflegends.com";
 
 // 하루(86400초) : ISR 캐싱을 위해 사용
-const ONE_DAY_SECONDS = 60 * 60 * 24;
+export const ONE_DAY_SECONDS = 60 * 60 * 24;
 
 // 최신 버전 가져오기 (라이엇 API에서 버전 정보를 가져옴)
 export const getLatestVersion = async (): Promise<string> => {
