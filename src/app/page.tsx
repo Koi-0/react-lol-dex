@@ -40,7 +40,6 @@ const HomePage = () => {
                   "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Elise_3.jpg"
                 }
                 alt="Picture of the author"
-                priority
                 width={400}
                 height={300}
               />
