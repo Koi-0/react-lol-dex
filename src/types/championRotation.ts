@@ -1,6 +1,6 @@
 // 챔피언 로테이션 데이터를 정의하는 타입
 export interface ChampionRotationData {
-  maxNewPlayerLevel: number;
-  freeChampionIdsForNewPlayers: number[];
   freeChampionIds: number[];
+  freeChampionIdsForNewPlayers: number[];
+  maxNewPlayerLevel: number;
 }
