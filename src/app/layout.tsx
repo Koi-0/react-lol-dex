@@ -10,12 +10,6 @@ const geistSans = localFont({
   weight: "100 900",
 });
 
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
 export const metadata: Metadata = {
   title: "LOL DEX - 리그 오브 레전드 백과사전",
   description:
@@ -29,9 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} antialiased`}>
         <header className="fixed top-0 z-10 w-full bg-gray-800 py-4 text-white">
           <nav className="container mx-auto flex justify-around">
             <Link href={"/"}>홈</Link>
