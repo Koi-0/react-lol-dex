@@ -8,7 +8,7 @@ export const API_BASE_URL = "https://ddragon.leagueoflegends.com";
 export const ONE_DAY_SECONDS = 60 * 60 * 24;
 
 // 최신 버전 가져오기 (라이엇 API에서 버전 정보를 가져옴)
-export async function getLatestVersion(): Promise<string> {
+export async function getLatestVersion() {
   const response = await fetch(`${API_BASE_URL}/api/versions.json`);
   const data: string[] = await response.json();
 
@@ -16,7 +16,7 @@ export async function getLatestVersion(): Promise<string> {
 }
 
 // 최신 버전의 챔피언 데이터 가져오기
-export async function getChampionData(): Promise<ChampionData | null> {
+export async function getChampionData() {
   // API 요청 (ISR 적용)
   const version = await getLatestVersion();
   const championDetailUrl = `${API_BASE_URL}/cdn/${version}/data/ko_KR/champion.json`;
@@ -26,7 +26,7 @@ export async function getChampionData(): Promise<ChampionData | null> {
       next: { revalidate: ONE_DAY_SECONDS },
     });
 
-    const { data } = await response.json();
+    const { data }: { data: ChampionData } = await response.json();
 
     return data;
   } catch (error) {
@@ -36,9 +36,7 @@ export async function getChampionData(): Promise<ChampionData | null> {
 }
 
 // 최신 버전의 챔피언 상세 데이터 가져오기
-export async function getChampionDetailData(
-  id: string,
-): Promise<ChampionData | null> {
+export async function getChampionDetailData(id: string) {
   // API 요청 (SSR 적용)
   const version = await getLatestVersion();
   const championDetailUrl = `${API_BASE_URL}/cdn/${version}/data/ko_KR/champion/${id}.json`;
@@ -48,7 +46,13 @@ export async function getChampionDetailData(
       cache: "no-store",
     });
 
-    const { data } = await response.json();
+    const {
+      data,
+    }: {
+      data: {
+        [championName: string]: ChampionData;
+      };
+    } = await response.json();
 
     return data[id];
   } catch (error) {
@@ -58,7 +62,7 @@ export async function getChampionDetailData(
 }
 
 // 최신 버전의 아이템 데이터 가져오기
-export async function getItemData(): Promise<ItemData | null> {
+export async function getItemData() {
   // API 요청 (SSG 적용)
   const version = await getLatestVersion();
   const itemUrl = `${API_BASE_URL}/cdn/${version}/data/ko_KR/item.json`;
@@ -68,7 +72,7 @@ export async function getItemData(): Promise<ItemData | null> {
       cache: "force-cache",
     });
 
-    const { data } = await response.json();
+    const { data }: { data: ItemData } = await response.json();
 
     return data;
   } catch (error) {
