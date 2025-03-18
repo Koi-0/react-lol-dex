@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 
 interface DetailIdProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export async function generateMetadata({
@@ -14,8 +14,8 @@ export async function generateMetadata({
 
   const response = await fetch(
     `${API_BASE_URL}/cdn/15.5.1/data/ko_KR/champion/${id}.json`,
-  ).then((res) => res.json());
-  const { data } = await response;
+  );
+  const { data } = await response.json();
   const championsMetadata: ChampionData = data[id];
 
   return {
