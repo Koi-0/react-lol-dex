@@ -20,11 +20,14 @@ export default async function Itempage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold text-[#f55]">아이템 목록 / SSG</h1>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
+      <h1 className="mb-4 text-2xl font-bold text-[#f55]">아이템 목록</h1>
+      <div className="grid grid-cols-4 gap-4">
         {items.map((item, index) => {
           return (
-            <div key={index} className="rounded border p-4 hover:shadow-lg">
+            <div
+              key={index}
+              className="space-y-2 rounded border p-4 hover:shadow-lg"
+            >
               <Image
                 src={`${API_BASE_URL}/cdn/15.5.1/img/item/${item.image.full}`}
                 alt={item.name}
@@ -36,6 +39,7 @@ export default async function Itempage() {
                 {item.name}
               </h2>
               <p className="text-gray-500">{item.plaintext}</p>
+              <p className="text-gray-500">gold : {item.gold.base}</p>
             </div>
           );
         })}

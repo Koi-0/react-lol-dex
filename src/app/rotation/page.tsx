@@ -34,7 +34,7 @@ const RotationPage = () => {
               key={champion.id}
               className="rounded border p-4 hover:shadow-lg"
             >
-              <Link href={`/champions/${champion.id}`}>
+              <Link href={`/champions/${champion.id}`} className="space-y-2">
                 <Image
                   src={`${API_BASE_URL}/cdn/15.5.1/img/champion/${champion.image.full}`}
                   alt={champion.name}
