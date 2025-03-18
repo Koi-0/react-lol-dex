@@ -19,8 +19,13 @@ const RotationPage = () => {
 
   if (isPending) return <div>Loading...</div>;
 
-  if (error || !freeChampionIds)
-    return <div>데이터를 불러오는 중 오류 발생</div>;
+  if (error) {
+    return <div>오류 발생 : {error?.message || "알 수 없는 오류"}</div>;
+  }
+
+  if (!freeChampionIds || freeChampionIds.length === 0) {
+    return <div>현재 무료 챔피언 데이터가 없습니다.</div>;
+  }
 
   return (
     <div>
