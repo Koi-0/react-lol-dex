@@ -21,10 +21,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // if (Math.random() < 0.1) throw new Error();
+
   return (
     <html lang="ko">
       <body className={`${geistSans.variable} antialiased`}>
-        <header className="fixed top-0 z-10 w-full bg-gray-800 py-4 text-white">
+        <header className="fixed top-0 z-10 w-full bg-gray-800 p-4 text-white">
           <nav className="container mx-auto flex justify-around">
             <Link href={"/"}>홈</Link>
             <Link href={"/champions"}>챔피언 목록</Link>
@@ -33,9 +35,11 @@ export default function RootLayout({
           </nav>
         </header>
         <Providers>
-          <main className="container mx-auto py-[100px]">{children}</main>
+          <main className="container mx-auto min-h-screen py-[100px]">
+            {children}
+          </main>
         </Providers>
-        <footer className="fixed bottom-0 mt-8 w-full bg-gray-800 p-4">
+        <footer className="fixed bottom-0 w-full bg-gray-800 p-4">
           <div className="container mx-auto text-center text-sm text-white">
             [Your Product Name] is not endorsed by Riot Games and does not
             reflect the views or opinions of Riot Games or anyone officially
