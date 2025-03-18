@@ -24,7 +24,6 @@ const HomePage = () => {
                   "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Camille_2.jpg"
                 }
                 alt="Picture of the author"
-                priority
                 width={400}
                 height={300}
               />
@@ -58,7 +57,6 @@ const HomePage = () => {
                   "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Akali_2.jpg"
                 }
                 alt="Picture of the author"
-                priority
                 width={400}
                 height={400}
               />
