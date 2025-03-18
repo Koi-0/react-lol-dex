@@ -5,4 +5,7 @@ export interface ItemData {
   image: {
     full: string;
   };
+  gold: {
+    base: number;
+  };
 }
