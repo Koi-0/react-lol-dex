@@ -10,14 +10,14 @@ const RotationPage = () => {
   // 챔피언 로테이션 데이터 가져오기
   const {
     data: freeChampionIds,
-    isLoading,
+    isPending,
     error,
   } = useQuery({
     queryKey: ["ChampionRotationData"],
     queryFn: getChampionRotationData,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isPending) return <div>Loading...</div>;
 
   if (error || !freeChampionIds)
     return <div>데이터를 불러오는 중 오류 발생</div>;
