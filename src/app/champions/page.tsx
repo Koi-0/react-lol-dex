@@ -21,7 +21,7 @@ export default async function ChampionPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold text-[#f55]">챔피언 목록 / ISR</h1>
+      <h1 className="mb-4 text-2xl font-bold text-[#f55]">챔피언 목록</h1>
       <div className="grid grid-cols-4 gap-4">
         {champions.map((champion) => {
           return (
@@ -29,7 +29,7 @@ export default async function ChampionPage() {
               key={champion.id}
               className="rounded border p-4 hover:shadow-lg"
             >
-              <Link href={`/champions/${champion.id}`}>
+              <Link href={`/champions/${champion.id}`} className="space-y-2">
                 <Image
                   src={`${API_BASE_URL}/cdn/15.5.1/img/champion/${champion.image.full}`}
                   alt={champion.name}
